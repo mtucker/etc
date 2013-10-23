@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Initialize</string>
+		<key>comment</key>
+		<string>Set some initial variable values</string>
+		<key>enabled</key>
+		<false/>
+		<key>eventTypes</key>
+		<array>
+			<string>startup</string>
+		</array>
+		<key>variables</key>
+		<dict>
+			<key>diskNotificationInterval</key>
+			<integer>1440</integer>
+			<key>diskFreeThreshold1</key>
+			<integer>10</integer>
+		</dict>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Disk Full #1</string>
+		<key>enabled</key>
+		<false/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.servermgr_info.diskstate</string>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operator</key>
+				<string>LessThan</string>
+				<key>operands</key>
+				<array>
+					<string>${event:freePercent}</string>
+					<string>${diskFreeThreshold1}</string>
+				</array>
+			</dict>
+			<dict>
+				<key>operator</key>
+				<string>LessThan</string>
+				<key>operands</key>
+				<array>
+					<string>${${event:volumeName}-LastEmailTime}</string>
+					<string>${builtin:now-24:00:00.00}</string>
+				</array>
+			</dict>
+		</array>
+		<key>variables</key>
+		<dict>
+			<key>${event:volumeName}-LastEmailTime</key>
+			<string>${builtin:now}</string>
+		</dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>subject</key>
+				<string>Disk Full Notification for ${event:volumeName} on ${builtin:hostName} (${event:freePercent%.2f}% free)</string>
+				<key>message</key>
+				<string>The volume ${event:volumeName} on ${builtin:hostName} is running out of free space.
+It has only ${event:freeBytes%m} (${event:freePercent%.2f}%) free.
+</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+			<dict>
+				<key>facility</key>
+				<string>ServerMgr</string>
+				<key>format</key>
+				<string>Disk Full Notification for ${event:volumeName} ${event:freeBytes%m} (${event:freePercent}%) free  threshold is ${diskFreeThreshold1}</string>
+				<key>logLevel</key>
+				<string>Warning</string>
+				<key>logType</key>
+				<string>Syslog</string>
+				<key>type</key>
+				<string>Log</string>
+			</dict>
+			<dict>
+				<key>command</key>
+				<string>/etc/diskspacemonitor/action/recover</string>
+				<key>arguments</key>
+				<array>
+					<string>${event:volumeName}</string>
+					<string>${diskFreeThreshold1}</string>
+					<string>${event:freePercent}</string>
+					<string>/var/log/diskspacemonitor.log</string>
+				</array>
+				<key>type</key>
+				<string>RunCommand</string>
+				<key>user</key>
+				<string>root</string>
+				<key>group</key>
+				<string>wheel</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Housekeeping</string>
+		<key>enabled</key>
+		<false/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.servermgr_info.diskstate</string>
+		</array>
+		<key>variables</key>
+		<dict>
+			<key>${event:volumeName}-LastFreeBytes</key>
+			<string>${event:freeBytes}</string>
+			<key>${event:volumeName}-LastFreePercent</key>
+			<string>${event:freePercent}</string>
+		</dict>
+	</dict>
+</array>
+</plist>

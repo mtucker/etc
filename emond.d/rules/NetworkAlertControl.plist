@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>actions</key>
+		<array/>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>startup</string>
+		</array>
+		<key>name</key>
+		<string>Initialize</string>
+		<key>variables</key>
+		<dict>
+			<key>global:lastSuppressionTime</key>
+			<integer>0</integer>
+			<key>global:suppressionInterval</key>
+			<integer>15</integer>
+		</dict>
+	</dict>
+        <dict>
+                <key>name</key>
+                <string>Set the new interval</string>
+                <key>actions</key>
+                <array/>
+                <key>enabled</key>
+                <true/>
+                <key>criterion</key>
+                <array>
+                        <dict>
+                                <key>operands</key>
+                                <array>
+                                        <string>event:suppressionInterval</string>
+                                </array>
+                                <key>operator</key>
+                                <string>Defined</string>
+                        </dict>
+                </array>
+                <key>eventTypes</key>
+                <array>
+                        <string>com.apple.network.suppress.notifications</string>
+                </array>
+                <key>variables</key>
+                <dict>
+                        <key>global:suppressionInterval</key>
+                        <string>${event:suppressionInterval}</string>
+                </dict>
+        </dict>
+	<dict>
+		<key>name</key>
+		<string>Suppress network notifications for suppressionInterval seconds</string>
+		<key>actions</key>
+		<array/>
+		<key>enabled</key>
+		<true/>
+		<key>criterion</key>
+		<array>
+		</array>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.suppress.notifications</string>
+		</array>
+		<key>variables</key>
+		<dict>
+			<key>global:lastSuppressionTime</key>
+			<string>${builtin:now} + ${global:suppressionInterval}</string>
+		</dict>
+	</dict>
+</array>
+</plist>

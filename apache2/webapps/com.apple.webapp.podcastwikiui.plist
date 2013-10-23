@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>name</key>
+		<string>com.apple.webapp.podcastwikiui</string>
+		<key>launchKeys</key>
+		<array>
+			<string>com.apple.collabd.podcast-cache-updater</string>
+		</array>
+		<key>proxies</key>
+		<dict>
+            <key>/RPC2</key>
+            <dict>
+                <key>path</key>
+                <string>/RPC2</string>
+                <key>urls</key>
+                <array>
+                    <string>http://localhost:8090/RPC2</string>
+                    <string>http://localhost:8091/RPC2</string>
+                    <string>http://localhost:8092/RPC2</string>
+                    <string>http://localhost:8093/RPC2</string>
+                </array>
+            </dict>
+		</dict>
+		<key>requiredModuleNames</key>
+		<array>
+			<string>proxy_module</string>
+			<string>xsendfile_module</string>
+			<string>headers_module</string>
+			<string>expires_module</string>
+			<string>deflate_module</string>
+		</array>
+	</dict>
+</plist>

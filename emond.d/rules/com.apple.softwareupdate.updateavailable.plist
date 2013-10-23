@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>localizationBundlePath</key>
+				<string>/System/Library/EventHandlers/com.apple.softwareupdate.updatesavailable.bundle</string>
+				<key>localizationTable</key>
+				<string>Localizable</string>
+				<key>message</key>
+				<string>The following software update is available for your server, ${builtin:hostName}:
+				
+	${event:name} ${event:version}</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Software update ${event:name} ${event:version} is available</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${event:identifier}-${event:version}-Seen</string>
+				</array>
+				<key>operator</key>
+				<string>NotDefined</string>
+			</dict>
+		</array>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.softwareupdate.updateavailable</string>
+		</array>
+		<key>name</key>
+		<string>Software Updates Available</string>
+		<key>variables</key>
+		<dict>
+			<key>${event:identifier}-${event:version}-Seen</key>
+			<true/>
+		</dict>
+	</dict>
+</array>
+</plist>

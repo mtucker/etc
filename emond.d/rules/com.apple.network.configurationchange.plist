@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>message</key>
+				<string>The host name of ${event:previousHostName} has changed to ${event:currentHostName}. The IPv4 network address has changed from ${event:previousIPv4Address} to ${event:currentIPv4Address}. Some services may not work correctly until they have been updated to use the new configuration.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Network change notification for ${event:previousHostName}</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${global:lastSuppressionTime}</string>
+					<string>${builtin:now}</string>
+				</array>
+				<key>operator</key>
+				<string>lessthan</string>
+			</dict>
+		</array>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.configurationchange</string>
+		</array>
+		<key>name</key>
+		<string>Network configuration change</string>
+	</dict>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>message</key>
+				<string>The host name of ${event:previousHostName} has changed to ${event:currentHostName}. The IPv4 network address has changed from ${event:previousIPv4Address} to ${event:currentIPv4Address}. The IPv6 network address has changed from ${event:previousIPv6Address} to ${event:currentIPv6Address}. Some services may not work correctly until they have been updated to use the new configuration.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Network change notification for ${event:previousHostName}</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${global:lastSuppressionTime}</string>
+					<string>${builtin:now}</string>
+				</array>
+				<key>operator</key>
+				<string>lessthan</string>
+			</dict>
+		</array>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.configurationchange6</string>
+		</array>
+		<key>name</key>
+		<string>Network configuration change w/IPv6</string>
+	</dict>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>message</key>
+				<string>The host name of ${event:previousHostName} has changed to ${event:currentHostName}. Some services may not work correctly until they have been updated to use the new configuration.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Network change notification for ${event:previousHostName}</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${global:lastSuppressionTime}</string>
+					<string>${builtin:now}</string>
+				</array>
+				<key>operator</key>
+				<string>lessthan</string>
+			</dict>
+		</array>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.hostnamechange</string>
+		</array>
+		<key>name</key>
+		<string>HostName change</string>
+	</dict>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>message</key>
+				<string>The IPv4 network address of ${event:previousHostName} has changed from ${event:previousIPv4Address} to ${event:currentIPv4Address}. Some services may not work correctly until they have been updated to use the new configuration.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Network IP Address change notification for ${event:previousHostName}</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${global:lastSuppressionTime}</string>
+					<string>${builtin:now}</string>
+				</array>
+				<key>operator</key>
+				<string>lessthan</string>
+			</dict>
+		</array>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.ipv4addresschange</string>
+		</array>
+		<key>name</key>
+		<string>IPv4 address change</string>
+	</dict>
+	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>message</key>
+				<string>The IPv6 network address of ${event:previousHostName} has changed from ${event:previousIPv6Address} to ${event:currentIPv6Address}. Some services may not work correctly until they have been updated to use the new configuration.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>subject</key>
+				<string>Network IP Address change notification for ${event:previousHostName}</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operands</key>
+				<array>
+					<string>${global:lastSuppressionTime}</string>
+					<string>${builtin:now}</string>
+				</array>
+				<key>operator</key>
+				<string>lessthan</string>
+			</dict>
+		</array>
+		<key>enabled</key>
+		<true/>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.network.ipv6addresschange</string>
+		</array>
+		<key>name</key>
+		<string>IPv6 address change</string>
+	</dict>
+</array>
+</plist>

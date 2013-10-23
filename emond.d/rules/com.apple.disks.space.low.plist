@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Low disk space</string>
+		<key>eventTypes</key>
+		<array>
+			<string>com.apple.disks.space.low</string>
+		</array>
+		<key>criterion</key>
+		<array>
+			<dict>
+				<key>operator</key>
+				<string>LessThan</string>
+				<key>operands</key>
+				<array>
+					<string>${${event:volumeName}-LastEmailTime}</string>
+					<string>${builtin:now-24:00:00.00}</string>
+				</array>
+			</dict>
+		</array>
+		<key>variables</key>
+		<dict>
+			<key>${event:volumeName}-LastEmailTime</key>
+			<string>${builtin:now}</string>
+		</dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>subject</key>
+				<string>The volume ${event:volumeName} is low on space</string>
+				<key>message</key>
+				<string>The volume ${event:volumeName} has only ${event:freeBytes%m} of ${event:totalBytes%m} free. If this volume stores service data and becomes full, then some services on your Mac may stop working properly until you make more space available. To free up additional space on this volume, delete temporary files or back up and remove old data. Review your settings for Time Machine in System Preferences. If "Create local snapshots" is selected, this may also be consuming space.</string>
+				<key>recipientAddresses</key>
+				<array>
+					<string>${global:notificationContacts}</string>
+				</array>
+				<key>localizationBundlePath</key>
+				<string>/System/Library/EventHandlers/com.apple.disks.space.low.bundle</string>
+				<key>localizationTable</key>
+				<string>Localizable</string>
+				<key>type</key>
+				<string>SendEmail</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>
